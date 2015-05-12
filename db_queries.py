@@ -89,9 +89,12 @@ if __name__ == '__main__':
 
     today = datetime.date.today()
     now = datetime.datetime.now()
-    jobTimes = [now + datetime.timedelta(minutes=-36)]
+    jobTimes = [now + datetime.timedelta(minutes=-36),
+                now + datetime.timedelta(minutes=-320),]
     
-    jobs = [ {'template':'proc_param', 'warnings':'0', 'errors':'0', 'status':'finished', 'ack':'', 'log':'', 'startts':jobTimes[0], 'lasteventts':jobTimes[0], 'lastevent':'start'} ]
+    jobs = [ {'template':'proc_param', 'warnings':'0', 'errors':'0', 'status':'finished', 'ack':'', 'log':'', 'startts':jobTimes[0], 'lasteventts':jobTimes[0], 'lastevent':'start'},
+             {'template':'log_puller', 'warnings':'0', 'errors':'1', 'status':'finished', 'ack':'', 'log':'', 'startts':jobTimes[1], 'lasteventts':jobTimes[1]+datetime.timedelta(minutes=-5), 'lastevent':'commit'},
+    ]
     
     parser = OptionParser()
     parser.add_option('--user', default='jobtracker')
@@ -99,11 +102,11 @@ if __name__ == '__main__':
 
     conninfo = 'dbname=crontracker user={user}'.format(user=options.user)
     cxn = SharedConnection(conninfo=conninfo, autocommit=True)
-
-    qry = 'DELETE FROM job_template'
-    cxn.execute(qry)
-
+    
     qry = 'DELETE FROM job_instance'
+    cxn.execute(qry)
+    
+    qry = 'DELETE FROM job_template'
     cxn.execute(qry)
     
     for template in templates:
