@@ -5,7 +5,9 @@ CREATE TABLE job_template (
        cron_entry VARCHAR NOT NULL,
        cmd_line VARCHAR NOT NULL,
        hardware_id INTEGER NOT NULL, -- references hardware(id)
-       writes_sentinels BOOLEAN NOT NULL DEFAULT FALSE
+       writes_sentinels BOOLEAN NOT NULL DEFAULT FALSE,
+       wiki_link VARCHAR NOT NULL DEFAULT '',
+       job_owner INTEGER -- REFERENCES users(id)
        );
 
 -- Job Instances
@@ -15,13 +17,11 @@ CREATE TABLE job_instance (
        warnings INTEGER NOT NULL DEFAULT 0,
        errors INTEGER NOT NULL DEFAULT 0,
        status VARCHAR NOT NULL DEFAULT 'running', -- { "running", "failed", "finished" }
-       wiki_link VARCHAR NOT NULL DEFAULT '',
        acknowledged INTEGER, -- REFERENCES users(id)
        log_file VARCHAR NOT NULL DEFAULT '',
        start_ts TIMESTAMP WITHOUT TIME ZONE NOT NULL DEFAULT NOW(),
        last_event_ts TIMESTAMP WITHOUT TIME ZONE NOT NULL DEFAULT NOW(),
-       last_event VARCHAR NOT NULL DEFAULT '',
-       job_owner INTEGER -- REFERENCES users(id)
+       last_event VARCHAR NOT NULL DEFAULT ''
        );
        
        
