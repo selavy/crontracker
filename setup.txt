@@ -1,0 +1,11 @@
+Install psycopg2
+================
+sudo apt-get install python-psycopg2
+
+Postgres setup
+================
+sudo -u postgres psql
+CREATE USER [username] WITH PASSWORD '[PASSWORD]';
+CREATE DATABASE crontracker OWNER [username];
+
+
