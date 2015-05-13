@@ -44,6 +44,8 @@ class JobRunCollector(object):
         ret['lasteventts'] = res['last_event_ts']
         ret['lastevent'] = res['last_event']
         return ret
+    def remove(self, val):
+        self.jobs.remove(val)
     def __len__(self):
         return len(self.jobs)
     def __iter__(self):

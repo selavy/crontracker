@@ -50,4 +50,8 @@ if __name__ == '__main__':
         print job['template']
 
         
-    
+    ret = transducers.combine(templates=templateCollector, jobs=jobCollector)
+    print ret
+
+    for r in ret.itervalues():
+        print r
