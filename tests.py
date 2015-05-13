@@ -2,6 +2,7 @@ from shared_connection import SharedConnection
 import sys
 import datetime
 from db_queries import *
+import transducers
 
 if __name__ == '__main__':
     from optparse import OptionParser
@@ -12,10 +13,13 @@ if __name__ == '__main__':
     today = datetime.date.today()
     now = datetime.datetime.now()
     jobTimes = [now + datetime.timedelta(minutes=-36),
-                now + datetime.timedelta(minutes=-320),]
+                now + datetime.timedelta(minutes=-320),
+                now + datetime.timedelta(minutes=-27),
+    ]
     
     jobs = [ {'template':'proc_param', 'warnings':'0', 'errors':'0', 'status':'finished', 'ack':'', 'log':'', 'startts':jobTimes[0], 'lasteventts':jobTimes[0], 'lastevent':'start'},
              {'template':'log_puller', 'warnings':'0', 'errors':'1', 'status':'finished', 'ack':'', 'log':'', 'startts':jobTimes[1], 'lasteventts':jobTimes[1]+datetime.timedelta(minutes=-5), 'lastevent':'commit'},
+             {'template':'', 'warnings':'0', 'errors':'0', 'status':'finished', 'ack':'', 'log':'', 'startts':jobTimes[2], 'lasteventts':jobTimes[2]+datetime.timedelta(minutes=-10), 'lastevent':''},
     ]
     
     parser = OptionParser()
@@ -37,6 +41,13 @@ if __name__ == '__main__':
     for job in jobs:
         cxn.execute(insertJobRunSQL(job))    
     
-    collector = TemplateCollector(cxn=cxn)
-    for template in collector:
+    templateCollector = TemplateCollector(cxn=cxn)
+    for template in templateCollector:
         print template['name']
+
+    jobCollector = JobRunCollector(cxn=cxn)
+    for job in jobCollector:
+        print job['template']
+
+        
+    

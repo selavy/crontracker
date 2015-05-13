@@ -1,6 +1,5 @@
 from shared_connection import SharedConnection
 import datetime
-import sys
 
 class TemplateCollector(object):
     def __init__(self, cxn=None):
@@ -29,21 +28,21 @@ class JobRunCollector(object):
     def __init__(self, cxn=None):
         cxn = cxn or SharedConnection()
         self.jobs = []
-        qry = 'SELECT * FROM job_instance'
+        qry = 'select job_template.template_name, job_instance.* from job_instance LEFT OUTER JOIN job_template ON (job_instance.template = job_template.id)'
         res = cxn.execute(qry)
         for row in res:
             self.jobs.append(self._parseJob(row))
     def _parseJob(self, res):
         ret = {}
-        ret['template'] = res['template']
-        ret['warnings'] = res['warnings'] or 0
-        ret['errors'] = res['errors'] or 0
-        ret['status'] = res['status'] or ''
+        ret['template'] = res['template_name']
+        ret['warnings'] = res['warnings']
+        ret['errors'] = res['errors']
+        ret['status'] = res['status']
         ret['ack'] = res['acknowledged'] or False
-        ret['log'] = res['log'] or ''
-        ret['startts'] = res['startts']
-        ret['lasteventts'] = res['lasteventts']
-        ret['lastevent'] = res['lastevent']
+        ret['log'] = res['log_file']
+        ret['startts'] = res['start_ts']
+        ret['lasteventts'] = res['last_event_ts']
+        ret['lastevent'] = res['last_event']
         return ret
     def __len__(self):
         return len(self.jobs)
@@ -81,40 +80,3 @@ def insertTemplateSQL(template):
     return 'INSERT INTO job_template (template_name, cron_entry, cmd_line, hardware_id, writes_sentinels, wiki_link, job_owner) VALUES {values}' \
         .format(values=templateSQL(template))
         
-if __name__ == '__main__':
-    from optparse import OptionParser
-    templates = [ {'name':'proc_param', 'cron':'00 04 * * 1-5', 'cmd':'proc_param --env=plesslie --do-something', 'hardware':4198, 'sentinels':False, 'owner':'24', 'wiki':''},
-                  {'name':'log_puller', 'cron':'00,15,30,45 10 * * 1-5', 'cmd':'log_puller --env=plesslie --do-something --else', 'hardware':2048, 'sentinels':True, 'owner':'0', 'wiki':'http://google.com'},
-                  ]
-
-    today = datetime.date.today()
-    now = datetime.datetime.now()
-    jobTimes = [now + datetime.timedelta(minutes=-36),
-                now + datetime.timedelta(minutes=-320),]
-    
-    jobs = [ {'template':'proc_param', 'warnings':'0', 'errors':'0', 'status':'finished', 'ack':'', 'log':'', 'startts':jobTimes[0], 'lasteventts':jobTimes[0], 'lastevent':'start'},
-             {'template':'log_puller', 'warnings':'0', 'errors':'1', 'status':'finished', 'ack':'', 'log':'', 'startts':jobTimes[1], 'lasteventts':jobTimes[1]+datetime.timedelta(minutes=-5), 'lastevent':'commit'},
-    ]
-    
-    parser = OptionParser()
-    parser.add_option('--user', default='jobtracker')
-    options, args = parser.parse_args()
-
-    conninfo = 'dbname=crontracker user={user}'.format(user=options.user)
-    cxn = SharedConnection(conninfo=conninfo, autocommit=True)
-    
-    qry = 'DELETE FROM job_instance'
-    cxn.execute(qry)
-    
-    qry = 'DELETE FROM job_template'
-    cxn.execute(qry)
-    
-    for template in templates:
-        cxn.execute(insertTemplateSQL(template))
-
-    for job in jobs:
-        cxn.execute(insertJobRunSQL(job))    
-    
-    collector = TemplateCollector(cxn=cxn)
-    for template in collector:
-        print template['name']
