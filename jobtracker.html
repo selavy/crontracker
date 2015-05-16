@@ -33,14 +33,14 @@
       background-color: #DEDEDE;
       }
 
-      div#see-more {
+      div.see-more {
       background-image: url(see-more.png);
       height: 24px;
       width: 24px;
       background-repeat: no-repeat;
       }
 
-      div#see-less {
+      div.see-less {
       background-image: url(see-less.png);
       height: 24px;
       width: 24px;
@@ -54,28 +54,22 @@
       border-color: #666666;
       background-color: #FFFFFF;
       text-align: center;
-      height: 24px;
-      }
-
-      td.status {
-      height: 24px;
-      width: 24px;
-      background-repeat: no-repeat;
-      background-size: 65% 80%;
       background-position: center;
       }
 
-      td.green {
-      background-image: url(green-check.png);
+      div.status {
+      text-align: center;
+      height: 24px;
+      width: 24px;
+      margin-left: auto;
+      margin-right: auto;
       }
 
-      td.yellow {
-      background-image: url(warning.png);
+      img.status-img {
+      height: 24px;
+      width: 24px;
       }
 
-      td.red {
-      background-image: url(error.png);
-      }
     </style>
   </head>
   <body>
@@ -101,8 +95,8 @@
       </thead>
       <tbody>
         <tr class="odd">
-          <td><div id="see-more"></div></td>
-          <td class="status green"></td>
+          <td><div class="see-more"></div></td>
+          <td><div class="status"><img src="green-check.png" class="status-img" /></div></td>
           <td>1</td>
           <td>dtcc bus</td>
           <td>0</td>
@@ -117,8 +111,8 @@
           <td></td>
         </tr>
         <tr>
-          <td><div id="see-more"></div></td>
-          <td class="status yellow"></td>
+          <td><div class="see-more"></div></td>
+          <td><div class="status"><img src="warning.png" class="status-img" /></div></td>
           <td>2</td>
           <td>first log pull</td>
           <td>1</td>
@@ -133,8 +127,8 @@
           <td></td>
         </tr>
         <tr class="odd">
-          <td><div id="see-less"></div></td>
-          <td class="status red"></td>
+          <td><div class="see-less"></div></td>
+          <td><div class="status"><img src="error.png" class="status-img" /></div></td>
           <td>3</td>
           <td>second log pull</td>
           <td>1</td>
@@ -151,7 +145,7 @@
         <!-- sub records under second log pull -->
         <tr>
           <td></td>
-          <td class="status red"></td>
+          <td><div class="status"><img src="error.png" class="status-img" /></div></td>
           <td></td>
           <td></td>
           <td>1</td>
