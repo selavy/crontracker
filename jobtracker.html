@@ -20,6 +20,13 @@
       width: 24px;
       background-repeat: no-repeat;
       }
+
+      div#see-less {
+      background-image: url(see-less.png);
+      height: 24px;
+      width: 24px;
+      background-repeat: no-repeat;
+      }
       
       td {
       border-width: 1px;
@@ -27,6 +34,23 @@
       border-style: solid;
       border-color: #666666;
       background-color: #FFFFFF;
+      }
+
+      td.status {
+      text-align: left;
+      height: 24px;
+      width: 24px;
+      background-repeat: no-repeat;
+      background-size: contain;
+      background-position: center;
+      }
+
+      td.green {
+      background-image: url(green-check.png);
+      }
+
+      td.yellow {
+      background-image: url(warning.png);
       }
     </style>
   </head>
@@ -54,7 +78,7 @@
       <tbody>
         <tr>
           <td><div id="see-more"></div></td>
-          <td>green</td>
+          <td class="status green"></td>
           <td>1</td>
           <td>dtcc bus</td>
           <td>0</td>
@@ -70,7 +94,7 @@
         </tr>
         <tr>
           <td><div id="see-more"></div></td>
-          <td>yellow</td>
+          <td class="status yellow"></td>
           <td>2</td>
           <td>first log pull</td>
           <td>1</td>
@@ -85,7 +109,7 @@
           <td></td>
         </tr>
         <tr>
-          <td><div id="see-more"></div></td>
+          <td><div id="see-less"></div></td>
           <td>red</td>
           <td>3</td>
           <td>second log pull</td>
