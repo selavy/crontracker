@@ -21,9 +21,7 @@
       table {
       border: 1px solid black;
       border-collapse: collapse;
-      /*      font-family: verdana, arial, sans-serif; */
       font-family: Helvetica Neue,Helvetica,Arial,sans-serif;
-      /*      font-family: Consolas,monaco,monospace; */
       font-size: 13px;
       }
 
@@ -48,7 +46,7 @@
       width: 24px;
       background-repeat: no-repeat;
       }
-      
+
       td {
       border-width: 1px;
       padding: 8px;
@@ -56,6 +54,7 @@
       border-color: #666666;
       background-color: #FFFFFF;
       text-align: center;
+      height: 24px;
       }
 
       td.status {
@@ -101,7 +100,7 @@
         </tr>
       </thead>
       <tbody>
-        <tr>
+        <tr class="odd">
           <td><div id="see-more"></div></td>
           <td class="status green"></td>
           <td>1</td>
@@ -133,11 +132,28 @@
           <td>n/a</td>
           <td></td>
         </tr>
-        <tr>
+        <tr class="odd">
           <td><div id="see-less"></div></td>
           <td class="status red"></td>
           <td>3</td>
           <td>second log pull</td>
+          <td>1</td>
+          <td>2</td>
+          <td>true</td>
+          <td>cnjovernight01</td>
+          <td>45 15 * * 1-5</td>
+          <td>15:45:00</td>
+          <td>failed to commit</td>
+          <td>16:02:05</td>
+          <td>n/a</td>
+          <td></td>
+        </tr>
+        <!-- sub records under second log pull -->
+        <tr>
+          <td></td>
+          <td class="status red"></td>
+          <td></td>
+          <td></td>
           <td>1</td>
           <td>2</td>
           <td>true</td>
