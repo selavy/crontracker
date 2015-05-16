@@ -104,10 +104,19 @@
       $(document).ready(function(){
           $("tr:not(.master)").hide();
           $("tr:first-child").show();
-          $("tr.master").show();
+//          $("tr.master").show();
           $("tr.master").click(function(){
-              //window.alert('hello');
-              $(this).next("tr").toggle();
+      //window.alert('hello');
+              curr = $(this).next("tr");
+              for (i = 0; i < 20; ++i) {
+                  if (curr.hasClass("master")) {
+                      break;
+                  } else {
+                      curr.toggle();
+                      curr = curr.next("tr");
+                  }
+              }
+      //        $(this).next("tr").toggle();
               $(this).find(".see-more").toggleClass("see-less");
           });
       });
@@ -184,22 +193,6 @@
           <td>n/a</td>
           <td></td>
         </tr>
-        <tr class="master">
-          <td><div class="see-more"></div></td>
-          <td><div class="status"><img src="error.png" class="status-img" /></div></td>
-          <td>3</td>
-          <td>second log pull</td>
-          <td>1</td>
-          <td>2</td>
-          <td>true</td>
-          <td>cnjovernight01</td>
-          <td>45 15,16 * * 1-5</td>
-          <td>15:45:00</td>
-          <td>failed to commit</td>
-          <td>17:02:05</td>
-          <td>n/a</td>
-          <td></td>
-        </tr>
         <!-- sub records under second log pull -->
         <tr>
           <td></td>
@@ -234,6 +227,22 @@
           <td></td>
         </tr>
         <!-- end sub records under second log pull -->
+        <tr class="master">
+          <td><div class="see-more"></div></td>
+          <td><div class="status"><img src="green-check.png" class="status-img" /></div></td>
+          <td>4</td>
+          <td>third log pull</td>
+          <td>0</td>
+          <td>0</td>
+          <td>true</td>
+          <td>cnjovernight01</td>
+          <td>45 15,16 * * 1-5</td>
+          <td>15:45:00</td>
+          <td>failed to commit</td>
+          <td>17:02:05</td>
+          <td>n/a</td>
+          <td></td>
+        </tr>
       </tbody>
     </table>
 
