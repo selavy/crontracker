@@ -59,15 +59,28 @@
 
       div.status {
       text-align: center;
-      height: 24px;
-      width: 24px;
-      margin-left: auto;
-      margin-right: auto;
+      /* height: 24px; */
+      /* width: 24px; */
+      top: 50%;
+      left: 50%;
+      /* margin-right: -50%;
+      transform: translate(-50%, -50%); */
+      
+      /* margin-left: auto; */
+      /* margin-right: auto; */
+      /* display: table-cell; */
+      /* horizontal-align: middle; */
+      /* vertical-align: middle; */
       }
 
       img.status-img {
       height: 24px;
       width: 24px;
+      }
+
+      img.mini-status-img {
+      height: 18px;
+      width: 18px;
       }
 
     </style>
@@ -127,6 +140,23 @@
           <td></td>
         </tr>
         <tr class="odd">
+          <td><div class="see-more"></div></td>
+          <td><div class="status"><img src="error.png" class="status-img" /></div></td>
+          <td>3</td>
+          <td>second log pull</td>
+          <td>1</td>
+          <td>2</td>
+          <td>true</td>
+          <td>cnjovernight01</td>
+          <td>45 15,16 * * 1-5</td>
+          <td>15:45:00</td>
+          <td>failed to commit</td>
+          <td>17:02:05</td>
+          <td>n/a</td>
+          <td></td>
+        </tr>
+
+        <tr class="odd">
           <td><div class="see-less"></div></td>
           <td><div class="status"><img src="error.png" class="status-img" /></div></td>
           <td>3</td>
@@ -145,7 +175,7 @@
         <!-- sub records under second log pull -->
         <tr>
           <td></td>
-          <td><div class="status"><img src="green-check.png" class="status-img" /></div></td>
+          <td><div class="status mini"><img src="green-check.png" class="mini-status-img" /></div></td>
           <td></td>
           <td></td>
           <td>0</td>
@@ -162,7 +192,7 @@
 
         <tr>
           <td></td>
-          <td><div class="status"><img src="error.png" class="status-img" /></div></td>
+          <td><div class="status"><img src="error.png" class="mini-status-img" /></div></td>
           <td></td>
           <td></td>
           <td>1</td>
@@ -176,6 +206,7 @@
           <td>n/a</td>
           <td></td>
         </tr>
+        <!-- end sub records under second log pull -->
       </tbody>
     </table>
 
