@@ -1,9 +1,30 @@
 <html>
   <head>
     <style type="text/css">
+
+      p.arial {
+      font-family: verdana, arial, sans-serif;
+      }
+
+      p.helvetica {
+      font-family: Helvetica Neue,Helvetica,Arial,sans-serif;
+      }
+
+      p.withoutarial {
+      font-family: Helvetica Neue,Helvetica,sans-serif;
+      }
+
+      p.consolas {
+      font-family: Consolas,monaco,monospace;
+      }
+      
       table {
       border: 1px solid black;
       border-collapse: collapse;
+      /*      font-family: verdana, arial, sans-serif; */
+      font-family: Helvetica Neue,Helvetica,Arial,sans-serif;
+      /*      font-family: Consolas,monaco,monospace; */
+      font-size: 13px;
       }
 
       th {
@@ -34,14 +55,14 @@
       border-style: solid;
       border-color: #666666;
       background-color: #FFFFFF;
+      text-align: center;
       }
 
       td.status {
-      text-align: left;
       height: 24px;
       width: 24px;
       background-repeat: no-repeat;
-      background-size: contain;
+      background-size: 65% 80%;
       background-position: center;
       }
 
@@ -51,6 +72,10 @@
 
       td.yellow {
       background-image: url(warning.png);
+      }
+
+      td.red {
+      background-image: url(error.png);
       }
     </style>
   </head>
@@ -110,7 +135,7 @@
         </tr>
         <tr>
           <td><div id="see-less"></div></td>
-          <td>red</td>
+          <td class="status red"></td>
           <td>3</td>
           <td>second log pull</td>
           <td>1</td>
@@ -126,6 +151,13 @@
         </tr>
       </tbody>
     </table>
-    
+
+
+    <p><h3>Fonts:</h3></p>
+    <p>1: the quick brown fox jumps over the lazy dog</p>
+    <p class="helvetica">2: the quick brown fox jumps over the lazy dog</p>
+    <p class="arial">3: the quick brown fox jumps over the lazy dog</p>
+    <p class="withoutarial">4: the quick brown fox jumps over the lazy dog</p>
+    <p class="consolas">5: the quick brown fox jumps over the lazy dog</p>    
   </body>
 </html>
