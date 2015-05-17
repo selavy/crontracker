@@ -104,10 +104,10 @@
       $(document).ready(function(){
           $("tr:not(.master)").hide();
           $("tr:first-child").show();
-//          $("tr.master").show();
-          $("tr.master").click(function(){
+      //          $("tr.master").show();
+          $("tr.master td:first-child").click(function(){
       //window.alert('hello');
-              curr = $(this).next("tr");
+              curr = $(this).parent().next("tr");
               for (i = 0; i < 20; ++i) {
                   if (curr.hasClass("master")) {
                       break;
@@ -117,7 +117,7 @@
                   }
               }
       //        $(this).next("tr").toggle();
-              $(this).find(".see-more").toggleClass("see-less");
+              $(this).parent().find(".see-more").toggleClass("see-less");
           });
       });
     </script>
